@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Store user progress and custom words",
+      "type": "object",
+      "properties": {
+        "skippedIds": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "learningIds": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "masteredIds": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "extraWords": {
+          "type": "array",
+          "items": { "$ref": "CustomWord" }
+        },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["skippedIds", "learningIds", "masteredIds", "extraWords", "updatedAt"]
+    },
+    "CustomWord": {
+      "title": "Custom Word",
+      "description": "Data structure for a single vocabulary word",
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "en": { "type": "string" },
+        "en_gb": { "type": "string" },
+        "zh": { "type": "string" },
+        "definition": { "type": "string" },
+        "type": { "type": "string" },
+        "level": { "type": "string" },
+        "examples": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "All data related to a single user's vocabulary progress"
+    }
+  }
+}

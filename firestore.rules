@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global safety net - Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Each authenticated user owns their document and its entire subtree.
+    match /users/{userId} {
+      allow read, write: if request.auth != null && (request.auth.uid == userId || request.auth.token.email == "dominic.branchaud@gmail.com");
+      
+      match /{document=**} {
+        allow read, write: if request.auth != null && (request.auth.uid == userId || request.auth.token.email == "dominic.branchaud@gmail.com");
+      }
+    }
+
+    // Connection test helper
+    match /test/connection {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
