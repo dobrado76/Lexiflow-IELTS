@@ -1,20 +1,44 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Lexiflow IELTS
 
-# Run and deploy your AI Studio app
+Desktop vocabulary app built with Electron + React + Vite.
 
-This contains everything you need to run your app locally.
+## Prerequisites
 
-View your app in AI Studio: https://ai.studio/apps/e4326280-2735-495a-894e-1c88257d2026
+- Node.js 20+
 
-## Run Locally
+## Setup
 
-**Prerequisites:**  Node.js
+1. `npm install`
+2. Copy `.env.example` to `.env.local` and set `GEMINI_API_KEY` (optional; needed for AI word generation)
 
+## Develop (desktop window)
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm run dev
+```
+
+Opens Lexiflow in an Electron window automatically — you do **not** need a browser.
+
+> Web-only preview (browser): `npm run dev:web`
+
+## Build portable Windows app
+
+```bash
+npm run dist
+```
+
+Output:
+
+```
+release/Lexiflow-IELTS-1.0.0-portable.exe
+```
+
+Run that `.exe` directly — no install required.
+
+## Other scripts
+
+| Script | What it does |
+|--------|----------------|
+| `npm start` | Launch Electron against an existing `dist/` build |
+| `npm run build` | Vite web bundle only (no packaging) |
+| `npm run clean` | Delete `dist/` and `release/` |
